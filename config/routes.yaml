@@ -2,3 +2,42 @@ index:
     path: /
     controller: App\Controller\DefaultController::index
 
+# listado de proveedores
+proveedores:
+    path:     /proveedores
+    defaults: { _controller: App\Controller\Proveedores\proveedoresController::lista }
+
+
+# formulario para crear un nuevo proveedor
+proveedores_nuevo:
+    path:     /proveedores/new
+    defaults: { _controller: App\Controller\Proveedores\proveedoresController::nuevo }
+# acción para crear un proveedor
+proveedores_crear:
+    path:     /proveedores/crear
+    defaults: { _controller: App\Controller\Proveedores\proveedoresController::crear }
+
+
+# formulario con los datos de un proveedor
+proveedor:
+    path:     /proveedores/{id}
+    defaults: { _controller: App\Controller\Proveedores\proveedoresController::datos }
+# acción para editar un proveedor
+proveedores_editar:
+    path:     /proveedores/editar/{id}
+    defaults: { _controller: App\Controller\Proveedores\proveedoresController::editar }
+    requirements:
+        id: \d+
+
+# acción para eliminar un proveedor
+proveedores_borrar:
+    path:     /proveedores/borrar/{id}
+    defaults: { _controller: App\Controller\Proveedores\proveedoresController::borrar }
+    requirements:
+        id: \d+
+# confirmación de proveedor borrado
+proveedores_borrado:
+    path:     /proveedores/borrado/{id}
+    defaults: { _controller: App\Controller\Proveedores\proveedoresController::borrado }
+    requirements:
+        id: \d+

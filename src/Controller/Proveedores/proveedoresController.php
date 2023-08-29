@@ -10,6 +10,7 @@ use App\Repository\TipoRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 
 class proveedoresController extends AbstractController
 {
@@ -28,12 +29,11 @@ class proveedoresController extends AbstractController
         $this->em = $em;
     }
 
-
     public function lista ()
     {
         $proveedores = $this->repository->findAll();
 
-        return $this->render('proveedores/lsita.html.twig', ["proveedores" => $proveedores]);
+        return $this->render('proveedores/lista.html.twig', ["proveedores" => $proveedores]);
     }
 
 
@@ -48,7 +48,7 @@ class proveedoresController extends AbstractController
 
     public function nuevo ()
     {
-        $tipos = $this->tipoRepository->getAll();
+        $tipos = $this->tipoRepository->findAll();
 
         return $this->render('proveedores/nuevo.html.twig', ["tipos" => $tipos]);
     }

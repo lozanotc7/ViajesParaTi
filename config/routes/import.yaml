@@ -1,3 +1,0 @@
-proveedores:
-  resource: proveedores.yaml
-  prefix:   /proveedores
