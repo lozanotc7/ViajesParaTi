@@ -40,14 +40,15 @@ class proveedoresController extends AbstractController
     public function datos (Request $request)
     {
         $proveedor = ($this->proveedorRepository->find($request->query->get('id')));
+        $tipos     = $this->tipoRepository->getAll();
 
-        return $this->render('proveedores/proveedor.html.twig', ["proveedor" => $proveedor]);
+        return $this->render('proveedores/proveedor.html.twig', ["proveedor" => $proveedor, "tipos" => $tipos]);
     }
 
 
     public function nuevo ()
     {
-        $tipos      = $this->tipoRepository->getAll();
+        $tipos = $this->tipoRepository->getAll();
 
         return $this->render('proveedores/nuevo.html.twig', ["tipos" => $tipos]);
     }
