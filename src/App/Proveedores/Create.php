@@ -28,7 +28,7 @@ class Create
 
     public function crear (array $data): Proveedor
     {
-        $tipo      = $this->tipoRepository->find($data['tipo']);
+        $tipo      = $this->tipoRepository->find($data['type']);
         $proveedor = (new Proveedor())
             ->setName($data['name'] )
             ->setEmail($data['email'] )

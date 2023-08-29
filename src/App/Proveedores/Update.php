@@ -36,7 +36,7 @@ class Update
 
     public function editar (array $data): Proveedor
     {
-        $tipo      = $this->tipoRepository->find($data['tipo']);
+        $tipo      = $this->tipoRepository->find($data['type']);
         $proveedor = ($this->proveedorRepository->find($data['id']))
             ->setName($data['name'] )
             ->setEmail($data['email'] )

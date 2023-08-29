@@ -10,7 +10,7 @@
 
 {% block breadcrumb %}
     <li class="breadcrumb-item"><a href="index.html">Backoffice</a></li>
-    <li class="breadcrumb-item">Proveedores</li>
+    <li class="breadcrumb-item"><a href="{{ path('proveedores') }}">Proveedores</a></li>
     <li class="breadcrumb-item active">Nuevo</li>
 {% endblock %}
 
@@ -21,29 +21,29 @@
             Alta de Proveedor
         </div>
         <div class="card-body">
-            <form>
+            <form action="{{ path('proveedores_crear') }}" method="post">
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <div class="form-floating mb-3 mb-md-0">
-                            <input class="form-control" id="inputName" type="text" placeholder="Nombre">
+                            <input class="form-control" id="inputName" type="text" placeholder="Nombre" name="name">
                             <label for="inputName">Nombre</label>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-floating">
-                            <input class="form-control" id="inputPhoneNumber" type="text" placeholder="Número de teléfono">
+                            <input class="form-control" id="inputPhoneNumber" type="text" placeholder="Número de teléfono" name="phone">
                             <label for="inputPhoneNumber">Número de Teléfono</label>
                         </div>
                     </div>
                 </div>
                 <div class="form-floating mb-3">
-                    <input class="form-control" id="inputEmail" type="email" placeholder="name@example.com">
+                    <input class="form-control" id="inputEmail" type="email" placeholder="name@example.com" name="email">
                     <label for="inputEmail">Dirección de EMail</label>
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <div class="form-floating mb-3 mb-md-0">
-                            <select class="form-control" id="inputType">
+                            <select class="form-control" id="inputType" name="isActive">
                                 <option value="1" selected>Sí</option>
                                 <option value="0">No</option>
                             </select>
@@ -52,7 +52,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-floating">
-                            <select class="form-control" id="inputType">
+                            <select class="form-control" id="inputType" name="type">
                                 {% for tipo in tipos %}
                                     <option value="{{ tipo.id }}">{{ tipo.name }}</option>
                                 {% endfor %}
@@ -62,7 +62,7 @@
                     </div>
                 </div>
                 <div class="mt-4 mb-0">
-                    <div class="d-grid"><a class="btn btn-primary btn-block" href="login.html">Crear Proveedor</a></div>
+                    <div class="d-grid"><input type="submit" class="btn btn-primary btn-block" value="Crear Proveedor"></div>
                 </div>
             </form>
         </div>

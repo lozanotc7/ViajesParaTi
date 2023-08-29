@@ -54,8 +54,8 @@
                         <td>{{ proveedor.phone }}</td>
                         <td>{{ proveedor.tipo.name }}</td>
                         <td>{{ proveedor.isActive }}</td>
-                        <td>{{ proveedor.created }}</td>
-                        <td>{{ proveedor.updated }}</td>
+                        <td>{{ proveedor.created | date("d/m/Y H:i:s") }}</td>
+                        <td>{{ proveedor.updated | date("d/m/Y H:i:s") }}</td>
                     </tr>
                 {% endfor %}
                 </tbody>

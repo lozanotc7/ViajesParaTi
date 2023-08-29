@@ -24,23 +24,23 @@ class proveedoresController extends AbstractController
         TipoRepository $tipoRepository,
         EntityManagerInterface $em
     ) {
-        $this->repository = $proveedorRepository;
+        $this->proveedorRepository = $proveedorRepository;
         $this->tipoRepository = $tipoRepository;
         $this->em = $em;
     }
 
     public function lista ()
     {
-        $proveedores = $this->repository->findAll();
+        $proveedores = $this->proveedorRepository->findAll();
 
         return $this->render('proveedores/lista.html.twig', ["proveedores" => $proveedores]);
     }
 
 
-    public function datos (Request $request)
+    public function datos (int $id, Request $request)
     {
-        $proveedor = ($this->proveedorRepository->find($request->query->get('id')));
-        $tipos     = $this->tipoRepository->getAll();
+        $proveedor = $this->proveedorRepository->find($id);
+        $tipos     = $this->tipoRepository->findAll();
 
         return $this->render('proveedores/proveedor.html.twig', ["proveedor" => $proveedor, "tipos" => $tipos]);
     }
@@ -68,35 +68,37 @@ class proveedoresController extends AbstractController
             "email" => $request->request->get('email'),
             "phone" => $request->request->get('phone'),
             "isActive" => $request->request->get('isActive'),
-            "tipo" => $request->request->get('tipo'),
+            "type" => $request->request->get('type'),
         ];
 
         $proveedor = (new Create($this->proveedorRepository, $this->tipoRepository))
             ->crear($data);
 
+        $request->query->add(["id" => $proveedor->getId()]);
+
         return $this->forward(
-            'App\Controller\Proveedores\proveedoresController::index',
-            [ 'id' => $proveedor->getId() ]
+            'App\Controller\Proveedores\proveedoresController::datos',
+            [ 'id' => $proveedor->getId(), 'request' => $request ]
         );
     }
 
-    public function editar (Request $request)
+    public function editar (int $id, Request $request)
     {
         $data = [
-            "id" => $request->query->get('id'),
+            "id" => $id,
             "name" => $request->request->get('name'),
             "email" => $request->request->get('email'),
             "phone" => $request->request->get('phone'),
             "isActive" => $request->request->get('isActive'),
-            "tipo" => $request->request->get('tipo'),
+            "type" => $request->request->get('type'),
         ];
 
         $proveedor = (new Update($this->proveedorRepository, $this->tipoRepository, $this->em))
             ->editar($data);
 
         return $this->forward(
-            'App\Controller\Proveedores\proveedoresController::index',
-            [ 'id' => $proveedor->getId() ]
+            'App\Controller\Proveedores\proveedoresController::datos',
+            ["id" => $id, "request" => $request]
         );
     }
 
