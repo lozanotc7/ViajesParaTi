@@ -2,8 +2,9 @@
 
 namespace App\Controller\Proveedores;
 
-use App\App\Proveedores\createProveedor;
-use App\Entity\Proveedor;
+use App\App\Proveedores\Create;
+use App\App\Proveedores\Delete;
+use App\App\Proveedores\Update;
 use App\Repository\ProveedorRepository;
 use App\Repository\TipoRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -27,45 +28,6 @@ class proveedoresController extends AbstractController
         $this->em = $em;
     }
 
-    public function nuevo (Request $request)
-    {
-        $tipo      = $this->getTipoFromRequest($request);
-        $proveedor = (new Proveedor())
-            ->setName($request->request->get('name') )
-            ->setEmail($request->request->get('email') )
-            ->setPhone($request->request->get('phone') )
-            ->setIsActive($request->request->get('isActive') )
-            ->setTipo($tipo);
-
-        $this->proveedorRepository->add($proveedor);
-
-        return $this->render('proveedores/proveedor.html.twig', ["proveedor" => $proveedor]);
-    }
-
-    public function editar (Request $request)
-    {
-        $tipo      = $this->getTipoFromRequest($request);
-        $proveedor = ($this->proveedorRepository->find($request->request->get('id')))
-            ->setName($request->request->get('name') )
-            ->setEmail($request->request->get('email') )
-            ->setPhone($request->request->get('phone') )
-            ->setIsActive($request->request->get('isActive') )
-            ->setTipo($tipo);
-
-        $this->em->flush();
-
-        return $this->render('proveedores/proveedor.html.twig', ["proveedor" => $proveedor]);
-    }
-
-    public function borrar (request $request)
-    {
-        $id        = $request->request->get('id');
-        $proveedor = ($this->proveedorRepository->find($id));
-
-        $this->proveedorRepository->remove($proveedor);
-
-        return $this->render('proveedores/borrado.html.twig', ["id" => $id]);
-    }
 
     public function lista ()
     {
@@ -74,8 +36,79 @@ class proveedoresController extends AbstractController
         return $this->render('proveedores/lsita.html.twig', ["proveedores" => $proveedores]);
     }
 
-    protected function getTipoFromRequest(Request $request)
+
+    public function datos (Request $request)
     {
-        return $this->tipoRepository->find($request->request->get('tipo'));
+        $proveedor = ($this->proveedorRepository->find($request->query->get('id')));
+
+        return $this->render('proveedores/proveedor.html.twig', ["proveedor" => $proveedor]);
+    }
+
+
+    public function nuevo ()
+    {
+        $tipos      = $this->tipoRepository->getAll();
+
+        return $this->render('proveedores/nuevo.html.twig', ["tipos" => $tipos]);
+    }
+
+    public function borrado (request $request)
+    {
+        $id = $request->query->get('id');
+
+        return $this->render('proveedores/borrado.html.twig', ["id" => $id]);
+    }
+
+
+    public function crear (Request $request)
+    {
+        $data = [
+            "name" => $request->request->get('name'),
+            "email" => $request->request->get('email'),
+            "phone" => $request->request->get('phone'),
+            "isActive" => $request->request->get('isActive'),
+            "tipo" => $request->request->get('tipo'),
+        ];
+
+        $proveedor = (new Create($this->proveedorRepository, $this->tipoRepository))
+            ->crear($data);
+
+        return $this->forward(
+            'App\Controller\Proveedores\proveedoresController::index',
+            [ 'id' => $proveedor->getId() ]
+        );
+    }
+
+    public function editar (Request $request)
+    {
+        $data = [
+            "id" => $request->query->get('id'),
+            "name" => $request->request->get('name'),
+            "email" => $request->request->get('email'),
+            "phone" => $request->request->get('phone'),
+            "isActive" => $request->request->get('isActive'),
+            "tipo" => $request->request->get('tipo'),
+        ];
+
+        $proveedor = (new Update($this->proveedorRepository, $this->tipoRepository, $this->em))
+            ->editar($data);
+
+        return $this->forward(
+            'App\Controller\Proveedores\proveedoresController::index',
+            [ 'id' => $proveedor->getId() ]
+        );
+    }
+
+    public function borrar (request $request)
+    {
+        $id = $request->query->get('id');
+
+        (new Delete($this->proveedorRepository))
+            ->borrar($id);
+
+        return $this->forward(
+            'App\Controller\Proveedores\proveedoresController::borrado',
+            [ 'id' => $id ]
+        );
     }
 }

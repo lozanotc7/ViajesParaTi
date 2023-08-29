@@ -1,0 +1,65 @@
+{% extends 'structure.html.twig' %}
+
+{% block page_title %}
+    Proveedores - Viajes Para Ti
+{% endblock %}
+
+{% block title %}
+    Listado de provedores
+{% endblock %}
+
+{% block breadcrumb %}
+    <li class="breadcrumb-item"><a href="index.html">Backoffice</a></li>
+    <li class="breadcrumb-item active">Proveedores</li>
+{% endblock %}
+
+{% block body %}
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            Listado de Proveedores
+        </div>
+        <div class="card-body">
+            <table id="datatablesSimple">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Email</th>
+                    <th>Teléfono</th>
+                    <th>Tipo</th>
+                    <th>Activo</th>
+                    <th>Alta</th>
+                    <th>Modificación</th>
+                </tr>
+                </thead>
+                <tfoot>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Email</th>
+                    <th>Teléfono</th>
+                    <th>Tipo</th>
+                    <th>Activo</th>
+                    <th>Alta</th>
+                    <th>Modificación</th>
+                </tr>
+                </tfoot>
+                <tbody>
+                {% for proveedor in proveedores %}
+                    <tr>
+                        <td>{{ proveedor.id }}</td>
+                        <td>{{ proveedor.name }}</td>
+                        <td>{{ proveedor.email }}</td>
+                        <td>{{ proveedor.phone }}</td>
+                        <td>{{ proveedor.tipo.name }}</td>
+                        <td>{{ proveedor.isActive }}</td>
+                        <td>{{ proveedor.created }}</td>
+                        <td>{{ proveedor.updated }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

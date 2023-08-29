@@ -1,19 +1,19 @@
 {% extends 'structure.html.twig' %}
 
 {% block page_title %}
-    {{ proveedor.name }} ({{ proveedor.id }}) - Proveedor - Viajes Para Ti
+    Proveedor eliminado - Viajes Para Ti
 {% endblock %}
 
 {% block title %}
-    {{ proveedor.name }} ({{ proveedor.id }})
+    Provedor eliminado
 {% endblock %}
 
 {% block breadcrumb %}
     <li class="breadcrumb-item"><a href="index.html">Backoffice</a></li>
     <li class="breadcrumb-item">Proveedores</li>
-    <li class="breadcrumb-item active">{{ proveedor.name }} ({{ proveedor.id }})</li>
+    <li class="breadcrumb-item active">Borrado</li>
 {% endblock %}
 
 {% block body %}
-    Content
+    El proveedor con Id {{ id }}, ha sido borrado.
 {% endblock %}
