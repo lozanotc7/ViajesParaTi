@@ -53,10 +53,8 @@ class proveedoresController extends AbstractController
         return $this->render('proveedores/nuevo.html.twig', ["tipos" => $tipos]);
     }
 
-    public function borrado (request $request)
+    public function borrado (int $id, request $request)
     {
-        $id = $request->query->get('id');
-
         return $this->render('proveedores/borrado.html.twig', ["id" => $id]);
     }
 
@@ -102,10 +100,8 @@ class proveedoresController extends AbstractController
         );
     }
 
-    public function borrar (request $request)
+    public function borrar (int $id, request $request)
     {
-        $id = $request->query->get('id');
-
         (new Delete($this->proveedorRepository))
             ->borrar($id);
 

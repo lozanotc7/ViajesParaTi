@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use App\App\ValueObjects\Email;
+use App\App\ValueObjects\Phone;
 use App\Repository\ProveedorRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -77,7 +79,7 @@ class Proveedor
 
     public function setEmail(string $email): self
     {
-        $this->email = $email;
+        $this->email = (new Email($email))();
 
         return $this;
     }
@@ -89,7 +91,7 @@ class Proveedor
 
     public function setPhone(string $phone): self
     {
-        $this->phone = $phone;
+        $this->phone = (new Phone($phone))();
 
         return $this;
     }

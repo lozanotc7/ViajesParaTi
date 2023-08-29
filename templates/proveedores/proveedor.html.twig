@@ -9,55 +9,80 @@
 {% endblock %}
 
 {% block breadcrumb %}
-    <li class="breadcrumb-item"><a href="index.html">Backoffice</a></li>
-    <li class="breadcrumb-item">Proveedores</li>
+    <li class="breadcrumb-item"><a href="{{ path('index') }}">Backoffice</a></li>
+    <li class="breadcrumb-item"><a href="{{ path('proveedores') }}">Proveedores</a></li>
     <li class="breadcrumb-item active">{{ proveedor.name }} ({{ proveedor.id }})</li>
 {% endblock %}
 
 {% block body %}
-    <form action="{{ path('proveedores_editar', {id: proveedor.id}) }}" method="post">
-        <input type="hidden" name="id" value="{{ proveedor.id }}">
-        <div class="row mb-3">
-            <div class="col-md-6">
-                <div class="form-floating mb-3 mb-md-0">
-                    <input class="form-control" id="inputName" type="text" placeholder="Nombre" value="{{ proveedor.name }}" name="name">
-                    <label for="inputName">{{ proveedor.name }}</label>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-floating">
-                    <input class="form-control" id="inputPhoneNumber" type="text" placeholder="Número de teléfono" value="{{ proveedor.phone }}" name="phone">
-                    <label for="inputPhoneNumber">{{ proveedor.phone }}</label>
-                </div>
-            </div>
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            Datos del Proveedor
         </div>
-        <div class="form-floating mb-3">
-            <input class="form-control" id="inputEmail" type="email" placeholder="name@example.com" value="{{ proveedor.email }}" name="email">
-            <label for="inputEmail">{{ proveedor.email }}</label>
-        </div>
-        <div class="row mb-3">
-            <div class="col-md-6">
-                <div class="form-floating mb-3 mb-md-0">
-                    <select class="form-control" id="inputType" name="isActive">
-                        <option value="1" {{ proveedor.isActive == 1 ? "selected" : "" }}>Sí</option>
-                        <option value="0" {{ proveedor.isActive == 0 ? "selected" : "" }}>No</option>
-                    </select>
-                    <label for="checkActivo">¿Está activo?</label>
+        <div class="card-body">
+            <form action="{{ path('proveedores_editar', {id: proveedor.id}) }}" method="post">
+                <input type="hidden" name="id" value="{{ proveedor.id }}">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3 mb-md-0">
+                            <input class="form-control" id="inputName" type="text" placeholder="Nombre" value="{{ proveedor.name }}" name="name">
+                            <label for="inputName">{{ proveedor.name }}</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <input class="form-control" id="inputPhoneNumber" type="text" placeholder="Número de teléfono" value="{{ proveedor.phone }}" name="phone">
+                            <label for="inputPhoneNumber">{{ proveedor.phone }}</label>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-floating">
-                    <select class="form-control" id="inputType" name="type">
-                        {% for tipo in tipos %}
-                            <option value="{{ tipo.id }}" {{ proveedor.tipo.id == tipo.id ? "selected" : "" }}>{{ tipo.name }}</option>
-                        {% endfor %}
-                    </select>
-                    <label for="inputType">Selecciona el Tipo</label>
+                <div class="form-floating mb-3">
+                    <input class="form-control" id="inputEmail" type="email" placeholder="name@example.com" value="{{ proveedor.email }}" name="email">
+                    <label for="inputEmail">{{ proveedor.email }}</label>
                 </div>
-            </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3 mb-md-0">
+                            <select class="form-control" id="inputType" name="isActive">
+                                <option value="1" {{ proveedor.isActive == 1 ? "selected" : "" }}>Sí</option>
+                                <option value="0" {{ proveedor.isActive == 0 ? "selected" : "" }}>No</option>
+                            </select>
+                            <label for="checkActivo">¿Está activo?</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <select class="form-control" id="inputType" name="type">
+                                {% for tipo in tipos %}
+                                    <option value="{{ tipo.id }}" {{ proveedor.tipo.id == tipo.id ? "selected" : "" }}>{{ tipo.name }}</option>
+                                {% endfor %}
+                            </select>
+                            <label for="inputType">Selecciona el Tipo</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4 mb-0">
+                    <div class="d-grid"><input type="submit" class="btn btn-primary btn-block" value="Actualizar Proveedor"></div>
+                </div>
+            </form>
         </div>
-        <div class="mt-4 mb-0">
-            <div class="d-grid"><input type="submit" class="btn btn-primary btn-block" value="Actualizar Proveedor"></div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            Eliminar el proveedor
         </div>
-    </form>
+        <div class="card-body">
+            <form action="{{ path('proveedores_borrar', {id: proveedor.id}) }}" method="post">
+                <input type="hidden" name="id" value="{{ proveedor.id }}">
+                <div class="mt-4 mb-0">
+                    <div class="d-grid"><input type="submit" class="btn btn-danger btn-block" value="Borrar Proveedor"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
 {% endblock %}

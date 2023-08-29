@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block breadcrumb %}
-    <li class="breadcrumb-item"><a href="index.html">Backoffice</a></li>
+    <li class="breadcrumb-item"><a href="{{ path('index') }}">Backoffice</a></li>
     <li class="breadcrumb-item active">Proveedores</li>
 {% endblock %}
 
@@ -48,14 +48,14 @@
                 <tbody>
                 {% for proveedor in proveedores %}
                     <tr>
-                        <td>{{ proveedor.id }}</td>
-                        <td>{{ proveedor.name }}</td>
-                        <td>{{ proveedor.email }}</td>
-                        <td>{{ proveedor.phone }}</td>
-                        <td>{{ proveedor.tipo.name }}</td>
-                        <td>{{ proveedor.isActive }}</td>
-                        <td>{{ proveedor.created | date("d/m/Y H:i:s") }}</td>
-                        <td>{{ proveedor.updated | date("d/m/Y H:i:s") }}</td>
+                        <td><a href="{{ path('proveedor', {id: proveedor.id}) }}">{{ proveedor.id }}</a></td>
+                        <td><a href="{{ path('proveedor', {id: proveedor.id}) }}">{{ proveedor.name }}</a></td>
+                        <td><a href="{{ path('proveedor', {id: proveedor.id}) }}">{{ proveedor.email }}</a></td>
+                        <td><a href="{{ path('proveedor', {id: proveedor.id}) }}">{{ proveedor.phone }}</a></td>
+                        <td><a href="{{ path('proveedor', {id: proveedor.id}) }}">{{ proveedor.tipo.name }}</a></td>
+                        <td><a href="{{ path('proveedor', {id: proveedor.id}) }}">{{ proveedor.isActive ? "si" : "no"}}</a></td>
+                        <td><a href="{{ path('proveedor', {id: proveedor.id}) }}">{{ proveedor.created | date("d/m/Y H:i:s") }}</a></td>
+                        <td><a href="{{ path('proveedor', {id: proveedor.id}) }}">{{ proveedor.updated | date("d/m/Y H:i:s") }}</a></td>
                     </tr>
                 {% endfor %}
                 </tbody>
