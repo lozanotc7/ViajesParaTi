@@ -1,0 +1,20 @@
+version: '1.0'
+services:
+  database:
+    container_name: RL_Database
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: my-secret-pw
+    networks:
+      - backend
+    tty: true
+  web:
+    container_name: RL_Web
+    build: ./
+    ports:
+      - "80:80"
+    networks:
+      - backend
+    tty: true
+networks:
+  backend:
