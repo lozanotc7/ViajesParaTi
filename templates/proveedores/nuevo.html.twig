@@ -15,6 +15,17 @@
 {% endblock %}
 
 {% block body %}
+    {% if app.request.get('error') %}
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                Se ha producido un error
+            </div>
+            <div class="card-body text-bg-danger">
+                {{ app.request.get('error') }}
+            </div>
+        </div>
+    {% endif %}
     <div class="card mb-4">
         <div class="card-header">
             <i class="fas fa-table me-1"></i>

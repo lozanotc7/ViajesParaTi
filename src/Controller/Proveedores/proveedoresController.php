@@ -8,6 +8,7 @@ use App\App\Proveedores\Update;
 use App\Repository\ProveedorRepository;
 use App\Repository\TipoRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use mysql_xdevapi\Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -69,14 +70,19 @@ class proveedoresController extends AbstractController
             "type" => $request->request->get('type'),
         ];
 
-        $proveedor = (new Create($this->proveedorRepository, $this->tipoRepository))
-            ->crear($data);
+        try {
+            $proveedor = (new Create($this->proveedorRepository, $this->tipoRepository))
+                ->crear($data);
+        } catch (\Exception $e) {
+            return $this->redirect(
+                $this->generateUrl('proveedores_nuevo') . '?error=' . $e->getMessage()
+            );
+        }
 
-        $request->query->add(["id" => $proveedor->getId()]);
+        $request->query->add([ "id" => $proveedor->getId() ]);
 
-        return $this->forward(
-            'App\Controller\Proveedores\proveedoresController::datos',
-            [ 'id' => $proveedor->getId(), 'request' => $request ]
+        return $this->redirect(
+            $this->generateUrl('proveedor',[ 'id' => $proveedor->getId() ])
         );
     }
 
@@ -91,13 +97,18 @@ class proveedoresController extends AbstractController
             "type" => $request->request->get('type'),
         ];
 
-        $proveedor = (new Update($this->proveedorRepository, $this->tipoRepository, $this->em))
-            ->editar($data);
+        $url = $this->generateUrl('proveedor', ['id' => $id]);
 
-        return $this->forward(
-            'App\Controller\Proveedores\proveedoresController::datos',
-            ["id" => $id, "request" => $request]
-        );
+        try {
+            (new Update($this->proveedorRepository, $this->tipoRepository, $this->em))
+                ->editar($data);
+        } catch (\Exception $e) {
+            return $this->redirect(
+                $url . '?error=' . $e->getMessage()
+            );
+        }
+
+        return $this->redirect($url);
     }
 
     public function borrar (int $id, request $request)
@@ -105,9 +116,8 @@ class proveedoresController extends AbstractController
         (new Delete($this->proveedorRepository))
             ->borrar($id);
 
-        return $this->forward(
-            'App\Controller\Proveedores\proveedoresController::borrado',
-            [ 'id' => $id ]
+        return $this->redirect(
+            $this->generateUrl('proveedores_borrado',[ 'id' => $id ])
         );
     }
 }

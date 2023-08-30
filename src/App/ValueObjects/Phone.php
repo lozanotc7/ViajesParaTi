@@ -9,6 +9,8 @@ class Phone extends StringValueObject
         $this->guardNoLetters($value);
 
         parent::__construct($this->normalize($value));
+
+        $this->guardNotEmpty($this->value);
     }
 
     private function normalize(string $value): string
@@ -20,6 +22,13 @@ class Phone extends StringValueObject
     {
         if (preg_match('/[a-zA-Z]/', $value)) {
             throw new \Exception('Letters not allowed on Phone numbers: "' . $value . '"');
+        }
+    }
+
+    private function guardNotEmpty(string $value)
+    {
+        if (strlen($value) === 0) {
+            throw new \Exception('Phone number cannot be empty');
         }
     }
 }
