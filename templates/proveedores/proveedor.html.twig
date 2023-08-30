@@ -75,7 +75,7 @@
             Eliminar el proveedor
         </div>
         <div class="card-body">
-            <form action="{{ path('proveedores_borrar', {id: proveedor.id}) }}" method="post">
+            <form id="deleteProveedorForm" action="{{ path('proveedores_borrar', {id: proveedor.id}) }}" method="post">
                 <input type="hidden" name="id" value="{{ proveedor.id }}">
                 <div class="mt-4 mb-0">
                     <div class="d-grid"><input type="submit" class="btn btn-danger btn-block" value="Borrar Proveedor"></div>

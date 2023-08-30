@@ -24,3 +24,18 @@ window.addEventListener('DOMContentLoaded', event => {
     }
 
 });
+
+let formDelete = document.getElementById("deleteProveedorForm")
+if(formDelete)
+{
+    formDelete.addEventListener("submit", confirmDelete, false);
+}
+
+function confirmDelete(event) {
+    event.preventDefault();
+
+    if (confirm("¿Desea eliminar el proveedor?"))
+    {
+        this.submit();
+    }
+}
