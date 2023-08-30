@@ -1,4 +1,6 @@
 version: '1.0'
+networks:
+  backend:
 services:
   database:
     container_name: RL_Database
@@ -16,5 +18,3 @@ services:
     networks:
       - backend
     tty: true
-networks:
-  backend:
