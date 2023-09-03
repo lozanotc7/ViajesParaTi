@@ -14,16 +14,6 @@ Move to the directory and run:
 
     docker compose up
 
-Connect to the web container:
-
-    docker exec -ti RL_Web /bin/bash
-
-And run the following commands to initialise the Database:
-
-    php bin/console doctrine:database:create
-    php bin/console doctrine:schema:update --force
-    php bin/console doctrine:query:sql "insert into tipo (name) values ('hotel'), ('pista'), ('complemento')"
-
 
 # Docker containers manual steps
 ## Database
@@ -71,11 +61,4 @@ For example:
     docker network create backend
     docker network connect backend RL_Web
     docker network connect backend RL_Database
-
-### Initialise the Database
-Run the following commands to initialise the Database:
-
-    php bin/console doctrine:database:create
-    php bin/console doctrine:schema:update --force
-    php bin/console doctrine:query:sql "insert into tipo (name) values ('hotel'), ('pista'), ('complemento')"
 

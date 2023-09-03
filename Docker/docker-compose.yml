@@ -4,7 +4,7 @@ networks:
 services:
   database:
     container_name: RL_Database
-    image: mysql:latest
+    build: ./Database/
     environment:
       MYSQL_ROOT_PASSWORD: my-secret-pw
     networks:
@@ -12,7 +12,7 @@ services:
     tty: true
   web:
     container_name: RL_Web
-    build: ./
+    build: ./Webserver/
     ports:
       - "80:80"
     networks:

@@ -12,7 +12,7 @@
 ###     docker exec -ti ViajesParaTi /bin/bash
 
 FROM ubuntu:22.04
-MAINTAINER Acobur Asesores <francisco.texeira@acobur.es>
+MAINTAINER Rodrigo Lozano
 
 
 # Environments vars
