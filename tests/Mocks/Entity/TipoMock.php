@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Entity\Mocks;
+namespace App\Tests\Mocks\Entity;
 
 use App\Entity\Tipo;
 use PHPUnit\Framework\TestCase;

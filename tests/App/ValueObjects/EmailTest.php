@@ -14,24 +14,24 @@ class EmailTest extends TestCase
         self::assertInstanceOf(Email::class,  new Email('cccc@cccccc.cccc.com'));
     }
 
-    public function testNeedAt()
+    public function testNeedAtException()
     {
         $this->expectException('Exception');
         new Email('aaaaa.aaaaa.com');
     }
 
-    public function testNeedOnlyOneAt()
+    public function testNeedOnlyOneAtException()
     {
         $this->expectException('Exception');
         new Email('aaaaa@aaaaa@aaaaa.com');
     }
 
-    public function testNeedDomain()
+    public function testNeedDomainException()
     {
         $this->expectException('Exception');
         new Email('aaaaa.@aaaaa');
     }
-    public function testNeedName()
+    public function testNeedNameException()
     {
         $this->expectException('Exception');
         new Email('@aaaaa.aaaaa.com');

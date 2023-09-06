@@ -3,9 +3,9 @@
 namespace App\Tests\App\Proveedores;
 
 use App\App\Proveedores\Create;
-use App\Tests\Entity\Mocks\TipoMock;
-use App\Tests\Repository\Mocks\ProveedorRepositoryMock;
-use App\Tests\Repository\Mocks\TipoRepositoryMock;
+use App\Tests\Mocks\Entity\TipoMock;
+use App\Tests\Mocks\Repository\ProveedorRepositoryMock;
+use App\Tests\Mocks\Repository\TipoRepositoryMock;
 use PHPUnit\Framework\TestCase;
 
 class CreateTest extends TestCase

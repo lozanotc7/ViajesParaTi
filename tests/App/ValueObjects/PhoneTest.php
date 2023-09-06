@@ -17,7 +17,7 @@ class PhoneTest extends TestCase
         self::assertInstanceOf(Phone::class, new Phone('611 11 11 11'));
     }
 
-    public function testNoLetters()
+    public function testNoLettersException()
     {
         $this->expectException('Exception');
         new Phone('0034asdf931654987');

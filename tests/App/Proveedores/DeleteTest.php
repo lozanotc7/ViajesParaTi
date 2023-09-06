@@ -5,8 +5,8 @@ namespace App\Tests\App\Proveedores;
 use App\App\Proveedores\Delete;
 use App\Entity\Proveedor;
 use App\Repository\ProveedorRepository;
-use App\Tests\Entity\Mocks\ProveedorMock;
-use App\Tests\Repository\Mocks\ProveedorRepositoryMock;
+use App\Tests\Mocks\Entity\ProveedorMock;
+use App\Tests\Mocks\Repository\ProveedorRepositoryMock;
 use PHPUnit\Framework\TestCase;
 
 class DeleteTest extends TestCase

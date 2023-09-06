@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Tests\Repository\Mocks;
+namespace App\Tests\Mocks\Repository;
 
 use App\Repository\ProveedorRepository;
-use App\Tests\Entity\Mocks\ProveedorMock;
+use App\Tests\Mocks\Entity\ProveedorMock;
 use PHPUnit\Framework\TestCase;
 
 class ProveedorRepositoryMock extends TestCase

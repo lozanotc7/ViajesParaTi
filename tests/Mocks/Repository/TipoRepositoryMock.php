@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Repository\Mocks;
+namespace App\Tests\Mocks\Repository;
 
 use App\Entity\Tipo;
 use App\Repository\TipoRepository;
