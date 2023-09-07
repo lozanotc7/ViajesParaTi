@@ -1,5 +1,6 @@
 # RL_Web
 Technical Test Repo.
+Create a simple CRUD for providers management using Symfony 4 and Docker.
 
 # Project
 - Symfony 4.4
